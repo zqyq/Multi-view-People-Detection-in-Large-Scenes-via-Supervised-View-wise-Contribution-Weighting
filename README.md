@@ -72,13 +72,13 @@ python main.py -d cvcs --variant 2D_SVP_VCW --pretrain /trained_2D_SVP.pth
 On Wildtrack and MultiviewX, we take the final detector trained on CVCS as the model, then test it with fine-tuning 
 and domain-adaptation techniques.
 
-## Perspective transfomations
+## Perspective transfomations 我建议去掉这一部分
 When we project the feature maps of images onto the ground planes of the scene, the projection process of CVCS and CityStreet
 is different from Wildtrack and MultiviewX which directly use ```kornia``` to do projection, it is based on the principle of
 [**Spatial transformer networks**](https://proceedings.neurips.cc/paper_files/paper/2015/file/33ceb07bf4eeb3da587e268d663aba1a-Paper.pdf).
 
 ## Pretrained models
-You can download the checkpoints an this link.
+You can download the checkpoints at this link.
 
 ## Acknowledgement
 This work was supported in parts by NSFC (62202312, 62161146005, U21B2023, U2001206), DEGP Innovation Team 

@@ -1,4 +1,4 @@
-# Multi-view Detection In Large Scenes via Supervised View-wise Contribution Weighting [arxiv](#)
+# Multi-View Detection In Large Scenes via Supervised View-Wise Contribution Weighting, AAAI 2024 [arxiv](#)
 
 ## Abstract
   Recent deep learning-based multi-view people detection (MVD) methods have shown promising results on existing
@@ -72,10 +72,12 @@ python main.py -d cvcs --variant 2D_SVP_VCW --pretrain /trained_2D_SVP.pth
 On Wildtrack and MultiviewX, we take the final detector trained on CVCS as the model, then test it with fine-tuning 
 and domain-adaptation techniques.
 
+<!-- 
 ## Perspective transfomations 我建议去掉这一部分
 When we project the feature maps of images onto the ground planes of the scene, the projection process of CVCS and CityStreet
 is different from Wildtrack and MultiviewX which directly use ```kornia``` to do projection, it is based on the principle of
-[**Spatial transformer networks**](https://proceedings.neurips.cc/paper_files/paper/2015/file/33ceb07bf4eeb3da587e268d663aba1a-Paper.pdf).
+[**Spatial transformer networks**](https://proceedings.neurips.cc/paper_files/paper/2015/file/33ceb07bf4eeb3da587e268d663aba1a-Paper.pdf). 
+-->
 
 ## Pretrained models
 You can download the checkpoints at this link.

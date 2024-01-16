@@ -12,8 +12,8 @@
   technique. Experimental results demonstrate the effectiveness of our approach in achieving promising 
   cross-scene multi-view people detection performance.
 ## Overview
-We release the PyTorch code for the MVDNet,a stable multi-view people detector with promising performance on CVCS,
-CitySTreet, Wildtrack and MultiviewX datasets. 
+We release the PyTorch code for the MVDNet, a stable multi-view people detector with promising performance on CVCS,
+CitySTreet, Wildtrack, and MultiviewX datasets. 
 
 ## Content
 - [Dependencies](#dependencies)
@@ -35,9 +35,9 @@ CitySTreet, Wildtrack and MultiviewX datasets.
 - argparse
 
 ## Data Preparation
-In the code implementation, the root path of the four main datasets are defined as ```/mnt/data/Datasets```. Of course,
+In the code implementation, the root path of the four main datasets is defined as ```/mnt/data/Datasets```. Of course,
 it can be changed.
-When you apply the method on your datasets or other paths, the root path should look like this:
+When you apply the method to your datasets or other paths, the root path should look like this:
 ```
 Datasets
 |__CVCS
@@ -50,11 +50,8 @@ Datasets
     |__...
 ```
 ## Training
- During the training phase, we need to train the model with 3 stages, the basic 
-feature extractor can be shared for each dataset, i.e., ResNet18 and VGG16. 
+ During the training phase, we need to train the model in 3 stages, the feature extractor is shared across all camera views, i.e., ResNet18 and VGG16. 
 
-If we train the final detector directly, we won't get good enough results since every part of the network 
-needs to be trained well.
 Take training a detector on CVCS dataset as an example, to train the final detector, run the following script in order.
 ```shell script
 python main.py -d cvcs --variant 2D 
@@ -72,12 +69,6 @@ python main.py -d cvcs --variant 2D_SVP_VCW --pretrain /trained_2D_SVP.pth
 On Wildtrack and MultiviewX, we take the final detector trained on CVCS as the model, then test it with fine-tuning 
 and domain-adaptation techniques.
 
-<!-- 
-## Perspective transfomations 我建议去掉这一部分
-When we project the feature maps of images onto the ground planes of the scene, the projection process of CVCS and CityStreet
-is different from Wildtrack and MultiviewX which directly use ```kornia``` to do projection, it is based on the principle of
-[**Spatial transformer networks**](https://proceedings.neurips.cc/paper_files/paper/2015/file/33ceb07bf4eeb3da587e268d663aba1a-Paper.pdf). 
--->
 
 ## Pretrained models
 You can download the checkpoints at this link.

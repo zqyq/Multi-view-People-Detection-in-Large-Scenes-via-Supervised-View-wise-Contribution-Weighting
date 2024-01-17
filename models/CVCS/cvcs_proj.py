@@ -8,6 +8,24 @@ import numpy as np
 
 
 def spatial_transoformation_layer(paras, x):
+    """
+    Project each 3D grid point to 2D and interpolate the surrounding area value as 3D grid point's value
+
+    Args:
+        paras: is a tuple, of shape [B, number_of_view, number_of_patch, output_size]
+        x: is a tuple with the following elements:
+            - "image_feature": the image feature extracted by encoder. Shape = [B, C, H, W]
+            - "camera_paras": the corresponding camera parameters, contains the internal and external parameters
+                              of the camera. Shape = [B, 15].
+                              In each batch, camera_paras[0~3] respectively represent fx, fy, u, v.
+                              camera_paras[4~8] is camera distortion parameters (k1, k2, p1, p2, k3).
+                              camera_paras[9~11] is rotation vector.
+                              camera_paras[12~14] is translation vector.
+            - "wld_map_paras": the scene parameters in world coordinate system. Shape = [B, 10].
+            - "hw_random":     the  starting points of each patch. Shape = [B, 2, number_of_patch]
+
+    Returns: the result of projecting a 2D image onto a 3D plane. Shape = [number_of_patch * B, C, output_size[0], output_size[1]]
+    """
     output = _transform(paras, x)
     output = output[0].clone().permute((0, 3, 1, 2))
     return output

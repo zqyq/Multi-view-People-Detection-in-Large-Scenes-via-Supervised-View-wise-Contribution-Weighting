@@ -1,0 +1,4 @@
+这里面包含对各个数据集的数据抓取操作和处理。
+小场景小数据集：Wildtrack、MultiviewX
+大场景小数据集：CityStreet
+大场景大数据集：CVCS

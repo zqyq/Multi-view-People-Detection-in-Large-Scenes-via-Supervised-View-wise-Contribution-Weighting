@@ -1,24 +1,21 @@
-from multiview_detector.utils.logger import Logger
+from utils.logger import Logger
 # from utils.draw_curve import draw_curve
 import torch
 import numpy as np
 import torchvision.transforms as T
 # from torchvision.utils import save_image
-import argparse
 import sys
-import shutil
 from distutils.dir_util import copy_tree
 import datetime
 import os
-from multiview_detector.utils.image_utils import img_color_denormalize
-from multiview_detector.models.W_M.WM_Detector import PerspTransDetector
-from multiview_detector.trainer.W_M.WM_trainer import PerspectiveTrainer
+from utils.image_utils import img_color_denormalize
+from models.W_M.WM_Detector import PerspTransDetector
+from trainer.W_M.WM_trainer import PerspectiveTrainer
 # from torch.utils.tensorboard import SummaryWriter
-from multiview_detector.utils.load_model import loadModel
-import tqdm
-from multiview_detector.datasets.W_M.Wildtrack import Wildtrack
-from multiview_detector.datasets.W_M.MultiviewX import MultiviewX
-from multiview_detector.datasets.W_M.frameDataset_head import frameDataset
+from utils.load_model import loadModel
+from datasets.W_M.Wildtrack import Wildtrack
+from datasets.W_M.MultiviewX import MultiviewX
+from datasets.W_M.frameDataset_head import frameDataset
 
 
 # from torch.utils.tensorboard import SummaryWriter
@@ -62,13 +59,13 @@ def model_run(args):
     # Save some important .py files
     ##################################
     scripts_dir = os.path.join(logdir, 'scripts')
-    copy_tree(os.path.join(args.project_root_path, 'multiview_detector/utils'), scripts_dir + '/utils')
-    copy_tree(os.path.join(args.project_root_path, 'multiview_detector/evaluation'), scripts_dir + '/evaluation')
-    copy_tree(os.path.join(args.project_root_path, 'multiview_detector/x_training/W_M'),
+    copy_tree(os.path.join(args.project_root_path, 'utils'), scripts_dir + '/utils')
+    copy_tree(os.path.join(args.project_root_path, 'evaluation'), scripts_dir + '/evaluation')
+    copy_tree(os.path.join(args.project_root_path, 'x_training/W_M'),
               scripts_dir + '/x_training/W_M')
-    copy_tree(os.path.join(args.project_root_path, 'multiview_detector/trainer/W_M'), scripts_dir + '/trainer/W_M')
-    copy_tree(os.path.join(args.project_root_path, 'multiview_detector/models/W_M'), scripts_dir + '/models/W_M')
-    copy_tree(os.path.join(args.project_root_path, 'multiview_detector/datasets/W_M'), scripts_dir + '/datasets/W_M')
+    copy_tree(os.path.join(args.project_root_path, 'trainer/W_M'), scripts_dir + '/trainer/W_M')
+    copy_tree(os.path.join(args.project_root_path, 'models/W_M'), scripts_dir + '/models/W_M')
+    copy_tree(os.path.join(args.project_root_path, 'datasets/W_M'), scripts_dir + '/datasets/W_M')
     ##################################
 
     sys.stdout = Logger(os.path.join(logdir, 'log.txt.txt'), )

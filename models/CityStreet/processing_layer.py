@@ -4,7 +4,7 @@ import torch.nn as nn
 import tensorflow as tf
 import matplotlib.pyplot as plt
 from keras.layers import Layer
-from multiview_detector.utils.person_help import vis
+from utils.person_help import vis
 
 class camera_sel_fusion_layer_rbm2_v2(nn.Module):
     def __init__(self, **kwargs):
@@ -184,7 +184,7 @@ class Dmap_consist_loss_layer(nn.Module):
 
 
 if __name__ == '__main__':
-    from multiview_detector.utils.person_help import vis
+    from utils.person_help import vis
     # x = tf.random.normal([3, 10, 10, 1], dtype=tf.float32, seed=1)
     x=torch.rand(3,10,10,1)
     tf_camera_sel_model = camera_sel_fusion_layer_rbm2_full_szie(batch_size=1, view_size=3)

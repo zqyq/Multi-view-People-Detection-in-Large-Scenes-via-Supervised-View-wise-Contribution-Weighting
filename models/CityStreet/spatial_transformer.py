@@ -4,11 +4,9 @@ import os
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
-import cv2
 import torch
 from PIL import Image
-from multiview_detector.utils.person_help import vis
-from multiview_detector.models.CityStreet import Ini_reduce_time_mul_height as Inir
+from models.CityStreet import Ini_reduce_time_mul_height as Inir
 
 
 class SpatialTransformer_v3:
@@ -26,27 +24,26 @@ class SpatialTransformer_v3:
         self.proj_views_heights = {}
         self.view_gp_masks = []
         # for direct use of projection instaed of calculating every time.
+        self.projection_files = os.path.join(kwargs['proj_root'], 'Projection_files')
+        os.makedirs(self.projection_files, exist_ok=True)
         for ph in self.person_heights:
-            if not os.path.exists(os.path.join(
-                    '/mnt/data/Yunfei/Study/Baseline_MVDet/Projection_files/Single_view_height_projeciton_relation',
-                    f'proj_view1_height{int(ph)}_reso{str(output_size)}.npy')):
-                Inir.proj_2Dto2D(self.input_size, self.output_size, self.devicenum, [ph])
+            if not os.path.exists(os.path.join(self.projection_files,
+                                               f'proj_view1_height{int(ph)}_reso{str(output_size)}.npy')):
+                Inir.proj_2Dto2D(self.input_size, self.output_size, self.devicenum, [ph], self.projection_files)
             for view in range(1, 4):
                 self.proj_views_heights[(view, int(ph))] = torch.from_numpy(np.load(
-                    os.path.join(
-                        '/mnt/data/Yunfei/Study/Baseline_MVDet/Projection_files/Single_view_height_projeciton_relation',
-                        f'proj_view{view}_height{int(ph)}_reso{str(output_size)}.npy'))).to(
+                    os.path.join(self.projection_files,
+                                 f'proj_view{view}_height{int(ph)}_reso{str(output_size)}.npy'))).to(
                     self.devicenum)
 
-        if not os.path.exists(f'/mnt/data/Yunfei/Study/Baseline_MVDet/Projection_files/Single_view_height'
-                              f'_projeciton_relation/proj_viewview1_mask_outsize{output_size}.npy'):
-            Inir.generate_cor_mask(out_shape=self.output_size)
+        if not os.path.exists(os.path.join(self.projection_files, 'proj_view1_mask_outsize{output_size}.npy')):
+            Inir.generate_cor_mask(out_shape=self.output_size, data_root=kwargs['data_root'],
+                                   mask_store_path=self.projection_files)
 
         for view in range(1, 4):
             self.view_gp_masks.append(
-                torch.from_numpy(np.load('/mnt/data/Yunfei/Study/Baseline_MVDet/Projection_files/'
-                                         'Single_view_height_projeciton_relation' +
-                                         f'/proj_viewview{view}_mask_outsize{output_size}.npy')).to(
+                torch.from_numpy(np.load(os.path.join(self.projection_files,
+                                                      f'proj_view{view}_mask_outsize{output_size}.npy'))).to(
                     self.devicenum))
         # variant_height = 1, take [   0.   583 , 1166, 1750  ] four height level.
         super(SpatialTransformer_v3, self).__init__()
@@ -181,9 +178,8 @@ def tensor_visualize(x, image_title='map', isVertical=False):
 
 
 if __name__ == '__main__':
-    import tensorflow as tf
 
-    # from multiview_detector.MultiHeightFusion.processing_layer import camera_sel_fusion_layer_rbm2_v2
+    # from MultiHeightFusion.processing_layer import camera_sel_fusion_layer_rbm2_v2
     height = 1750
     img_path1 = '/home/yunfei/Data/CityStreet/test_persons/frame_0636_v1.jpg'
     img_path2 = '/home/yunfei/Data/CityStreet/test_persons/frame_0636_v2.jpg'

@@ -1,24 +1,22 @@
-from multiview_detector.utils.logger import Logger
+from utils.logger import Logger
 # from utils.draw_curve import draw_curve
 import torch
 import numpy as np
 import torchvision.transforms as T
 # from torchvision.utils import save_image
-import argparse
 import sys
-import shutil
 from distutils.dir_util import copy_tree
 import datetime
 import os
-from multiview_detector.utils.image_utils import img_color_denormalize
+from utils.image_utils import img_color_denormalize
 
-from multiview_detector.models.CityStreet.CityStreet_Detector import PerspTransDetector
-from multiview_detector.trainer.CityStreet.CityStreet_Trainer import PerspectiveTrainer
+from models.CityStreet.CityStreet_Detector import PerspTransDetector
+from trainer.CityStreet.CityStreet_Trainer import PerspectiveTrainer
 # from torch.utils.tensorboard import SummaryWriter
-from multiview_detector.utils.load_model import loadModel
+from utils.load_model import loadModel
 import tqdm
-from multiview_detector.datasets.CityStreet.Citystreet import Citystreet as Base
-from multiview_detector.datasets.CityStreet.frame_CityStreet import frameDataset
+from datasets.CityStreet.Citystreet import Citystreet as Base
+from datasets.CityStreet.frame_CityStreet import frameDataset
 
 
 # from torch.utils.tensorboard import SummaryWriter
@@ -62,10 +60,10 @@ def model_run(args):
     ##################################
     scripts_dir = os.path.join(logdir, 'scripts')
     # os.makedirs(scripts_dir,exist_ok=True)
-    copy_tree('/mnt/data/Yunfei/Study/MVD_VCW/multiview_detector/datasets/CityStreet', scripts_dir)
-    copy_tree('/mnt/data/Yunfei/Study/MVD_VCW/multiview_detector/models/CityStreet', scripts_dir)
-    copy_tree('/mnt/data/Yunfei/Study/MVD_VCW/multiview_detector/trainer/CityStreet', scripts_dir)
-    copy_tree('/mnt/data/Yunfei/Study/MVD_VCW/multiview_detector/x_training/CityStreet', scripts_dir)
+    copy_tree(os.path.join(args.proj_root,'datasets/CVCS'), scripts_dir)
+    copy_tree(os.path.join(args.proj_root,'models/CVCS'), scripts_dir)
+    copy_tree(os.path.join(args.proj_root,'trainer/CVCS'), scripts_dir)
+    copy_tree(os.path.join(args.proj_root,'x_training/CVCS'), scripts_dir)
     ##################################
 
     sys.stdout = Logger(os.path.join(logdir, 'log.txt.txt'), )
@@ -100,4 +98,3 @@ def model_run(args):
     for epoch in tqdm.tqdm(range(1, args.epochs + 1)):
         trainer.train(args.variant, train_loader, epoch, optimizer, scheduler)
         trainer.val(args.variant, val_loader, os.path.join(logdir, 'test.txt'), epoch)
-    

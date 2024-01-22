@@ -115,7 +115,7 @@ class Wildtrack(VisionDataset):
 
 def test():
     # pom文件是camera测出来的？然后这个test比较了Ground truth和测出来的pom文件之间的误差
-    from multiview_detector.utils.projection import get_imagecoord_from_worldcoord
+    from utils.projection import get_imagecoord_from_worldcoord
     dataset = Wildtrack(os.path.expanduser('/mnt/data/Datasets/Wildtrack'), )
     pom = dataset.read_pom()
     # print(pom[0][0])

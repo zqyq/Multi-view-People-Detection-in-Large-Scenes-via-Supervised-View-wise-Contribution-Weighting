@@ -7,7 +7,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 import kornia
 from torchvision.models.vgg import vgg11
-from multiview_detector.models.resnet import resnet18
+from models.resnet import resnet18
 
 import matplotlib.pyplot as plt
 

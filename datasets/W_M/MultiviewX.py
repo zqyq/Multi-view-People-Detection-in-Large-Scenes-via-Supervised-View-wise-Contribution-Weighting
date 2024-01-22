@@ -112,7 +112,7 @@ class MultiviewX(VisionDataset):
 
 
 def test():
-    from multiview_detector.utils.projection import get_imagecoord_from_worldcoord
+    from utils.projection import get_imagecoord_from_worldcoord
     dataset = MultiviewX(os.path.expanduser('~/Data/MultiviewX'), )
     pom = dataset.read_pom()
 

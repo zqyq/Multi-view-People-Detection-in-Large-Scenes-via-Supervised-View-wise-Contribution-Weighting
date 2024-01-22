@@ -3,17 +3,16 @@ import argparse
 import torch
 import torch.nn as nn
 from torchvision.models.vgg import vgg16
-from multiview_detector.models.resnet import resnet18
+from models.resnet import resnet18
 
-import matplotlib.pyplot as plt
 import os
-from multiview_detector.models.CityStreet.spatial_transformer import SpatialTransformer_v3
-from multiview_detector.utils.person_help import vis, savefeatvis
+from models.CityStreet.spatial_transformer import SpatialTransformer_v3
+from utils.person_help import savefeatvis
 import torch.nn.functional as F
 
 
 class PerspTransDetector(nn.Module):
-    def __init__(self, dataset, args, logdir):  # vgg11 resnet18
+    def __init__(self, dataset, args, logdir):  # vgg16 resnet18
         super().__init__()
         self.args = args
         self.arch = self.args.arch
@@ -85,7 +84,9 @@ class PerspTransDetector(nn.Module):
 
         self.STN = SpatialTransformer_v3(input_size=[1, *self.hfwf, 1], output_size=self.hgwg,
                                          device=self.device[1],
-                                         person_heights=args.person_heights)
+                                         person_heights=args.person_heights,
+                                         proj_root=args.proj_root,
+                                         data_root=args.data_root)
 
     @staticmethod
     def freeze_net(*args):
@@ -133,12 +134,11 @@ class PerspTransDetector(nn.Module):
 
 def test(args):
     # from utils.person_help import vis
-    from multiview_detector.utils.load_model import loadModel
+    from utils.load_model import loadModel
     import torchvision.transforms as transforms
-    from multiview_detector.datasets.CityStreet.Citystreet import Citystreet
-    from multiview_detector.datasets.CityStreet.frame_CityStreet import frameDataset
+    from datasets.CityStreet.Citystreet import Citystreet
+    from datasets.CityStreet.frame_CityStreet import frameDataset
     os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
-    from torch.utils.data import DataLoader
     _transform = transforms.Compose([
         transforms.ToTensor(),
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])

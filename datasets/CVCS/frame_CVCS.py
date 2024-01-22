@@ -3,7 +3,7 @@ import torch
 
 from torchvision.datasets import VisionDataset
 import torchvision.transforms as transforms
-from multiview_detector.utils.image_utils import draw_umich_gaussian, gaussian2D
+from utils.image_utils import draw_umich_gaussian, gaussian2D
 import os
 # import sys
 import numpy as np
@@ -11,7 +11,7 @@ import json
 import cv2
 import random
 from PIL import Image
-from multiview_detector.utils.person_help import vis
+from utils.person_help import vis
 import scipy
 
 
@@ -375,7 +375,7 @@ class frameDataset(VisionDataset):
 
 
 def test():
-    from multiview_detector.datasets.CVCS.CVCS import CVCS
+    from datasets.CVCS.CVCS import CVCS
     from torch.utils.data import DataLoader
     root = '/mnt/data/Datasets/CVCS'
     # 使用ImageNet的均值和标准差进行归一化

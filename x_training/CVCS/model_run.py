@@ -1,4 +1,4 @@
-from multiview_detector.utils.logger import Logger
+from utils.logger import Logger
 # from utils.draw_curve import draw_curve
 import torch
 import numpy as np
@@ -10,14 +10,14 @@ import shutil
 from distutils.dir_util import copy_tree
 import datetime
 import os
-from multiview_detector.utils.image_utils import img_color_denormalize
-from multiview_detector.models.CVCS.CVCS_Detector import PerspTransDetector
-from multiview_detector.trainer.CVCS.CVCS_Trainer import PerspectiveTrainer
+from utils.image_utils import img_color_denormalize
+from models.CVCS.CVCS_Detector import PerspTransDetector
+from trainer.CVCS.CVCS_Trainer import PerspectiveTrainer
 # from torch.utils.tensorboard import SummaryWriter
-from multiview_detector.utils.load_model import loadModel
+from utils.load_model import loadModel
 import tqdm
-from multiview_detector.datasets.CVCS.CVCS import CVCS as Base
-from multiview_detector.datasets.CVCS.frame_CVCS import frameDataset
+from datasets.CVCS.CVCS import CVCS as Base
+from datasets.CVCS.frame_CVCS import frameDataset
 
 
 # from torch.utils.tensorboard import SummaryWriter
@@ -59,10 +59,10 @@ def model_run(args):
     # Save some important .py files
     ##################################
     scripts_dir = os.path.join(logdir, 'scripts')
-    copy_tree(os.path.join(args.proj_root,'multiview_detector/datasets/CVCS'), scripts_dir)
-    copy_tree(os.path.join(args.proj_root,'multiview_detector/models/CVCS'), scripts_dir)
-    copy_tree(os.path.join(args.proj_root,'multiview_detector/trainer/CVCS'), scripts_dir)
-    copy_tree(os.path.join(args.proj_root,'multiview_detector/x_training/CVCS'), scripts_dir)
+    copy_tree(os.path.join(args.proj_root,'datasets/CVCS'), scripts_dir)
+    copy_tree(os.path.join(args.proj_root,'models/CVCS'), scripts_dir)
+    copy_tree(os.path.join(args.proj_root,'trainer/CVCS'), scripts_dir)
+    copy_tree(os.path.join(args.proj_root,'x_training/CVCS'), scripts_dir)
     ##################################
     sys.stdout = Logger(os.path.join(logdir, 'log.txt.txt'), )
     print('Settings:')

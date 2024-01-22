@@ -10,9 +10,9 @@ from torchvision.datasets import VisionDataset
 from torchvision.transforms import ToTensor
 import kornia
 
-from multiview_detector.utils.projection import *
-from multiview_detector.utils import gaussian_blur_detecting, gaussian_blur_counting
-from multiview_detector.utils.person_help import *
+from utils.projection import *
+from utils import gaussian_blur_detecting, gaussian_blur_counting
+from utils.person_help import *
 import matplotlib.pyplot as plt
 
 
@@ -185,9 +185,9 @@ class frameDataset(VisionDataset):
 
 
 def test():
-    from multiview_detector.datasets.W_M.Wildtrack import Wildtrack
-    # from multiview_detector.datasets.MultiviewX import MultiviewX
-    from multiview_detector.utils.projection import get_worldcoord_from_imagecoord
+    from datasets.W_M.Wildtrack import Wildtrack
+    # from datasets.MultiviewX import MultiviewX
+    from utils.projection import get_worldcoord_from_imagecoord
     dataset = frameDataset(Wildtrack(os.path.expanduser('~/Data/Wildtrack')))
     # test projection
     # world_grid_maps = []

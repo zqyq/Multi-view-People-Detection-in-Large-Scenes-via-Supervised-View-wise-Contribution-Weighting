@@ -5,10 +5,10 @@ import torch.nn as nn
 import torch.nn.functional as F
 import kornia
 from torchvision.models.vgg import vgg11, vgg16
-from multiview_detector.models.resnet import resnet18
-from multiview_detector.utils.person_help import *
+from models.resnet import resnet18
+from utils.person_help import *
 import matplotlib.pyplot as plt
-from multiview_detector.utils.person_help import vis
+from utils.person_help import vis
 
 
 class PerspTransDetector(nn.Module):
@@ -132,12 +132,12 @@ class PerspTransDetector(nn.Module):
 
 def test(args):
     # from utils.person_help import vis
-    from multiview_detector.utils.load_model import loadModel
+    from utils.load_model import loadModel
     import torchvision.transforms as transforms
     os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
     # os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
-    from multiview_detector.datasets.CVCS.CVCS import CVCS
-    from multiview_detector.datasets.CVCS.frame_CVCS import frameDataset
+    from datasets.CVCS.CVCS import CVCS
+    from datasets.CVCS.frame_CVCS import frameDataset
     from torch.utils.data import DataLoader
     _transform = transforms.Compose([
         transforms.ToTensor(),

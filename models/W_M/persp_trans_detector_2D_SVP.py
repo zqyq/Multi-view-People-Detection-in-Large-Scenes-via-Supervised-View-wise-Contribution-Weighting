@@ -5,8 +5,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import kornia
 from torchvision.models.vgg import vgg11
-from multiview_detector.models.resnet import resnet18
-from multiview_detector.utils.person_help import vis
+from models.resnet import resnet18
+from utils.person_help import vis
 
 import matplotlib.pyplot as plt
 
@@ -143,7 +143,7 @@ def test():
     from datasets.W_M.MultiviewX import MultiviewX
     import torchvision.transforms as T
     from torch.utils.data import DataLoader
-    from multiview_detector.utils.gaussian_mse import target_transform
+    from utils.gaussian_mse import target_transform
     transform = T.Compose([T.Resize([720, 1280]),  # H,W
                            T.ToTensor(),
                            T.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])])

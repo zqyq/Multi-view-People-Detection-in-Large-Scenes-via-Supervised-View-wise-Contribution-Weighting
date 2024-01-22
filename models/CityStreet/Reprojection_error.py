@@ -5,8 +5,8 @@ from math import sqrt, pow
 import h5py
 import torch
 
-from multiview_detector.models.CityStreet.spatial_transformer import SpatialTransformer_v3
-from multiview_detector.utils.person_help import *
+from models.CityStreet import SpatialTransformer_v3
+from utils.person_help import *
 
 
 def dist_error(proj_coords, gp_coord):

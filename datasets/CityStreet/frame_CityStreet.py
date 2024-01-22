@@ -8,14 +8,14 @@ from matplotlib import pyplot as plt
 from torchvision.datasets import VisionDataset
 from torchvision.transforms import ToTensor
 
-# from multiview_detector.datasets.CityStreet.datagen import conv_process
-from multiview_detector.datasets.CityStreet.view_mask import get_view_gp_mask
-from multiview_detector.utils.image_utils import img_color_denormalize
-from multiview_detector.utils.gaussian_blur_detecting import draw_umich_gaussian
-from multiview_detector.utils.person_help import vis
+# from datasets.CityStreet.datagen import conv_process
+from datasets.CityStreet.view_mask import get_view_gp_mask
+from utils.image_utils import img_color_denormalize
+from utils.gaussian_blur_detecting import draw_umich_gaussian
+from utils.person_help import vis
 
 
-# from multiview_detector.utils.gaussian_blur_counting import draw_umich_gaussian, gaussian2D
+# from utils.gaussian_blur_counting import draw_umich_gaussian, gaussian2D
 
 class frameDataset(VisionDataset):
     def __init__(self, args, base, train=True, _transform=None):
@@ -200,10 +200,10 @@ class frameDataset(VisionDataset):
         imgs_gt = torch.from_numpy(np.concatenate(imgs_gt))
 
         # ground plane gt
-        gp_gt = torch.from_numpy(self.map_gt_from_coords[frame])[None] * self.facofmaxgt_gp
+        gp_gt = torch.from_numpy(self.map_gt_from_coords[frame])[None]
 
         # masked view_gp_gt on the ground plane
-        view_gp_gt = self.view_gp_gt[frame] * self.facofmaxgt_gp
+        view_gp_gt = self.view_gp_gt[frame]
 
         return imgs, imgs_gt.float(), view_gp_gt.float(), gp_gt.float(), frame
 
@@ -226,7 +226,7 @@ def test(args):
 
 if __name__ == '__main__':
     import argparse
-    from multiview_detector.datasets.CityStreet.Citystreet import Citystreet
+    from datasets.CityStreet.Citystreet import Citystreet
     import torchvision.transforms as T
     from torch.utils.data import DataLoader
 

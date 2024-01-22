@@ -8,11 +8,11 @@ import tqdm
 
 from PIL import Image
 import numpy as np
-from multiview_detector.utils.nms import nms
-from multiview_detector.evaluation.evaluate import evaluate
-from multiview_detector.utils.person_help import vis
+from utils.nms import nms
+from evaluation.evaluate import evaluate
+from utils.person_help import vis
 import matplotlib.pyplot as plt
-from multiview_detector.utils.image_utils import add_heatmap_to_image, prediction_vis
+from utils.image_utils import add_heatmap_to_image, prediction_vis
 
 
 class PerspectiveTrainer:

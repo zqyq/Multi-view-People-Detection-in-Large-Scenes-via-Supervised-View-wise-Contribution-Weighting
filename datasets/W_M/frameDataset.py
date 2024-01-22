@@ -11,7 +11,7 @@ from torch import nn
 from torchvision.datasets import VisionDataset
 from torchvision.transforms import ToTensor
 
-from multiview_detector.utils.projection import *
+from utils.projection import *
 
 
 class frameDataset(VisionDataset):
@@ -168,7 +168,7 @@ class frameDataset(VisionDataset):
 def test():
     from datasets.W_M.Wildtrack import Wildtrack
     # from datasets.MultiviewX import MultiviewX
-    from multiview_detector.utils.projection import get_worldcoord_from_imagecoord
+    from utils.projection import get_worldcoord_from_imagecoord
     dataset = frameDataset(Wildtrack(os.path.expanduser('~/Data/Wildtrack')))
     import torch.nn.functional as F
     imgs, map_gt, imgs_gt, _ = dataset.__getitem__(0)

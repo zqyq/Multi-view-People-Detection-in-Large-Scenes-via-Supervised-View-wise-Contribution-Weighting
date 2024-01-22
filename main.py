@@ -1,15 +1,17 @@
 import argparse
 import os
-import sys
 
 import numpy as np
 import torch
 
+os.environ['OMP_NUM_THREADS'] = '1'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
 
-# os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3'
-# os.environ['CUDA_VISIBLE_DEVICES'] = '1,2,3'
-# os.environ['CUDA_VISIBLE_DEVICES'] = '3'
+
 def main(args):
+    # root path
+    project_root_path = os.path.abspath(os.path.dirname(__file__))
+    args.project_root_path = project_root_path
     # seed
     if args.seed is not None:
         np.random.seed(args.seed)
@@ -20,56 +22,53 @@ def main(args):
     else:
         torch.backends.cudnn.benchmark = True
 
+    # For debug
+    args.variant = '2D_SVP_VCW'
+    # args.dataset = 'cvcs'
+    args.dataset = 'citystreet'
+    # args.dataset = 'wildtrack'
+    # args.dataset = 'multiviewx'
+    # args.arch = 'resnet18'
+    args.arch = 'vgg16'
+    # args.fix_2D = 1
+    # args.fix_svp = 1
+    # args.variant = '2D_SVP'
+    # args.variant = '2D_SVP_VCW'
+
     # dataset selection
-    if args.dataset == 'wildtrack' or args.dataset == 'multiviewx':
-        if args.variant == '2D':
-            from multiview_detector.x_training.W_M.model_run_2D import model_run
-        elif args.variant == '2D_SVP':
-            from multiview_detector.x_training.W_M.model_run_2D_SVP import model_run
-        elif args.variant == '2D_SVP_3D':
-            from multiview_detector.x_training.W_M.model_run_2D_SVP_3D import model_run
-        else:
-            raise Exception('Wrong variants.')
-    elif args.dataset == 'citystreet':
-        if args.variant == '2D':
-            from multiview_detector.x_training.CityStreet.model_run_2D import model_run
-        elif args.variant == '2D_SVP':
-            from multiview_detector.x_training.CityStreet.model_run_2D_SVP import model_run
-        elif args.variant == '2D_SVP_WS':
-            from multiview_detector.x_training.CityStreet.model_run_2D_SVP_WS import model_run
-        elif args.variant == '2D_SVP_VCW':
-            from multiview_detector.x_training.CityStreet.model_run_2D_SVP_VCW import model_run
-        elif args.variant == 'MH_2D_SVP':
-            from multiview_detector.x_training.CityStreet.model_run_2D_SVP_Multi_height_MVDet import model_run
-        elif args.variant == 'MH_2D_SVP_VCW':
-            from multiview_detector.x_training.CityStreet.model_run_2D_SVP_VCW_Multi_height import model_run
-        else:
-            raise Exception('Wrong variants.')
-    elif args.dataset == 'cvcs':
-        from multiview_detector.x_training.CVCS.model_run import model_run
+    if args.dataset == 'wildtrack' or args.dataset == 'multiviewx':  # Only for test
+        # args.pretrain = '/mnt/data/Yunfei/Study/MVD_VCW/logs/cvcs_dataset/resnet18/2D_SVP_VCW/2023-12-11_21-03-06bs_1_mo0.9_wd0.0001_lr0.0001_lrslambda_epo50_valEpo5_ct0.4_nt5_dt5/latest_2D_SVP_VCW_model.pth'
+        from x_training.W_M.model_run import model_run
+    elif args.dataset == 'citystreet':  # Train the complete model
+        from x_training.CityStreet.model_run import model_run
+    elif args.dataset == 'cvcs':  # Train the complete model
+        from x_training.CVCS.model_run import model_run
     else:
         raise Exception('Input wrong dataset name.')
-    args.person_heights = list(map(lambda x: int(x), args.person_heights.split(',')))
-
     model_run(args)
 
 
 if __name__ == '__main__':
     # settings
     parser = argparse.ArgumentParser(description='Multiview detector')
-    parser.add_argument('--reID', action='store_true')
     parser.add_argument('--variant', type=str, default='2D_SVP_VCW',
-                        choices=['default', '2D', '2D_SVP', '2D_3D', '2D_SVP_3D', '2D_SVP_WS', '2D_SVP_VCW',
-                                 'MH_2D_SVP', 'MH_2D_SVP_VCW'])
-    parser.add_argument('--arch', type=str, default='vgg16', choices=['vgg16', 'resnet18'])
+                        choices=['default', '2D', '2D_SVP', '2D_VCW', '2D_SVP_VCW'],
+                        help='2D means only train image feature extractor,2D+SVP means based on the trained extractor,'
+                             ' we train the detector for single-view prediction, 2D+SVP+VCW means that based on the trained'
+                             ' single-view detector, we train the overall detector for view-wise contribution weighting, the final detector.')
+    parser.add_argument('--arch', type=str, default='resnet18', choices=['vgg16', 'resnet18'])
     parser.add_argument('-d', '--dataset', type=str, default='citystreet',
                         choices=['wildtrack', 'multiviewx', 'citystreet', 'cvcs'])
-
+    parser.add_argument('--data_root', type=str, default='/mnt/data/Datasets')  # determined by the dataset directory
+    parser.add_argument('--proj_root', type=str,
+                        default='/mnt/data/Yunfei/Study/MVD_VCW')  # need to be changed by yourself
+    parser.add_argument('--pretrain', type=str, default=None, help="The pretrained model which could be loaded.")
     parser.add_argument('-j', '--num_workers', type=int, default=4)
     parser.add_argument('-b', '--batch_size', type=int, default=1, metavar='N',
                         help='input batch size for training (default: 1)')
 
-    parser.add_argument('--epochs', type=int, default=200, metavar='N', help='number of epochs to train (default: 10)')
+    parser.add_argument('--epochs', type=int, default=100, metavar='N', help='number of epochs to train (default: 10)')
+    parser.add_argument('--val_epochs', type=int, default=5)
     parser.add_argument('--lr', type=float, default=0.01, metavar='LR', help='learning rate (default: 0.1)')
     parser.add_argument('--lrfac', type=float, default=0.01, help='generating smaller lr')
     parser.add_argument('--lr_decay', '--ld', type=float, default=1e-4)
@@ -83,7 +82,11 @@ if __name__ == '__main__':
     parser.add_argument('--seed', type=int, default=1, help='random seed (default: None)')
     parser.add_argument('--test', type=str, default=None)
 
-    parser.add_argument('--facofmaxgt', '--fm', type=float, default=1000)
+    parser.add_argument('--facofmaxgt', '--fm', type=float, default=100,
+                        help='The factor is really important which affects the performance of the model. It is used to enlarge'
+                             'the pixel value of the probability map generated by Gasuuian operations for better training.'
+                             'Note that the factor in the pretrained dataset&model should be the same as the one used in'
+                             'the current dataset.')
     parser.add_argument('--facofmaxgt_gp', '--fmg', type=float, default=10)
 
     parser.add_argument('--fix_2D', type=float, default=1)
@@ -96,15 +99,14 @@ if __name__ == '__main__':
 
     parser.add_argument('--weight_svp', type=float, default=1)
     parser.add_argument('--weight_2D', type=float, default=1)
-    parser.add_argument('--weight_ssv', type=float, default=1)
 
     parser.add_argument('--cls_thres', '--ct', type=float, default=0.4)
-    parser.add_argument('--nms_thres', '--nt', type=float, default=10)
-    parser.add_argument('--dist_thres', '--dt', type=float, default=20)
+    parser.add_argument('--nms_thres', '--nt', type=float, default=40)
+    parser.add_argument('--dist_thres', '--dt', type=float, default=80)
 
     # parser.add_argument('--person_heights', '--ph', type=list, default=[0, 600, 1200, 1800])
-    parser.add_argument('--person_heights', '--ph', type=str, default='1750')
-    parser.add_argument('--multiheight', '--mh', type=str, default='3drom', choices=['shot', '3drom'])
+    parser.add_argument('--person_heights', '--ph', type=list, default=[1750])
+    parser.add_argument('--devices', '--cd', type=list, default=['cuda:0', 'cuda:1'])
     args = parser.parse_args()
 
     main(args)

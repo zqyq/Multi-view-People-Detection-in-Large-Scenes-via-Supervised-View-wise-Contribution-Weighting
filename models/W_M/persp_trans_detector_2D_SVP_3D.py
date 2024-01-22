@@ -5,9 +5,8 @@ import torch.nn as nn
 import torch.nn.functional as F
 import kornia
 from torchvision.models.vgg import vgg11
-from multiview_detector.models.resnet import resnet18
-from multiview_detector.utils.person_help import *
-import matplotlib.pyplot as plt
+from models.resnet import resnet18
+from utils.person_help import *
 
 
 class PerspTransDetector_2D_SVP_3D(nn.Module):
@@ -167,9 +166,8 @@ class PerspTransDetector_2D_SVP_3D(nn.Module):
 
 
 def test():
-    from multiview_detector.datasets.W_M.frameDataset import frameDataset
-    from multiview_detector.datasets.W_M.Wildtrack import Wildtrack
-    from multiview_detector.datasets.W_M.MultiviewX import MultiviewX
+    from datasets.W_M.frameDataset import frameDataset
+    from datasets.W_M.Wildtrack import Wildtrack
     import torchvision.transforms as T
     from torch.utils.data import DataLoader
 

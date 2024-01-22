@@ -6,7 +6,7 @@ import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
-from multiview_detector.datasets.CityStreet import camera_proj_Zhang as proj
+from datasets.CityStreet import camera_proj_Zhang as proj
 
 device = torch.device('cpu')
 
@@ -35,7 +35,7 @@ def world2image(view, worldcoords):
 #     return proj_views_heights, view_gp_masks
 
 
-def proj_2Dto2D(input_shape, out_shape, devicenum, person_heights):
+def proj_2Dto2D(input_shape, out_shape, devicenum, person_heights, proj_store_path):
     w = 676
     h = 380
     H = out_shape[0]
@@ -114,25 +114,24 @@ def proj_2Dto2D(input_shape, out_shape, devicenum, person_heights):
             view_ic[2:3, :] = view_ic[2:3, :]  # / 400
             proj_height = np.concatenate([view_ic[0:1, :], view_ic[1:2, :], view_ic[2:3, :]], axis=0)
             proj_views_heights[(viewnum, int(ph))] = torch.from_numpy(proj_height)
-            np.save(os.path.join(
-                '/mnt/data/Yunfei/Study/Baseline_MVDet/Projection_files/Single_view_height_projeciton_relation',
-                f'proj_{view}_height{int(ph)}_reso{str(out_shape)}.npy'), view_ic)
-                # proj_view1_height{int(ph)}_reso{str(output_size)}.npy'
+            np.save(os.path.join(proj_store_path,
+                                 f'proj_{view}_height{int(ph)}_reso{str(out_shape)}.npy'), view_ic)
     return proj_views_heights
 
-def generate_cor_mask(out_shape):
+
+def generate_cor_mask(out_shape, data_root, mask_store_path):
     # view_gp_masks=[]
     for view in range(1, 4):
         # view_gp_masks
         if view == 1:
             view = 'view1'
-            view_gp_mask = np.load('/home/yunfei/Data/CityStreet/mask/view1_GP_mask.npz')
+            view_gp_mask = np.load(os.path.join(data_root, 'CityStreet/mask/view1_GP_mask.npz'))
         if view == 2:
             view = 'view2'
-            view_gp_mask = np.load('/home/yunfei/Data/CityStreet/mask/view2_GP_mask.npz')
+            view_gp_mask = np.load(os.path.join(data_root, 'CityStreet/mask/view2_GP_mask.npz'))
         if view == 3:
             view = 'view3'
-            view_gp_mask = np.load('/home/yunfei/Data/CityStreet/mask/view3_GP_mask.npz')
+            view_gp_mask = np.load(os.path.join(data_root, 'CityStreet/mask/view3_GP_mask.npz'))
         # gp view mask:
         view_gp_mask = view_gp_mask['arr_0']
         view_gp_mask = cv2.resize(view_gp_mask, (out_shape[1], out_shape[0]))
@@ -142,8 +141,10 @@ def generate_cor_mask(out_shape):
         # num_channels = fdim  ###### remember to add the depth dim
         # view_gp_mask = view_gp_mask.repeat(1, 1, 1, num_channels)
         # view_gp_masks.append(view_gp_mask)
-        np.save(f'/mnt/data/Yunfei/Study/Baseline_MVDet/Projection_files/Single_view_height_projeciton_relation/'
-                f'proj_view{view}_mask_outsize{out_shape}.npy', view_gp_mask.numpy())
+        np.save(os.path.join(mask_store_path,
+                             f'proj_{view}_mask_outsize{out_shape}.npy'), view_gp_mask.numpy())
+
+
 def test():
     input_imgshape = (1, 1520, 2704, 3)
     outshape = (768, 640)

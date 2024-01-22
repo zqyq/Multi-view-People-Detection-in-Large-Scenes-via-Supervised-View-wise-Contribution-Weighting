@@ -6,12 +6,12 @@ import torch.nn.functional as F
 import matplotlib.pyplot as plt
 import cv2
 from PIL import Image
-from multiview_detector.evaluation.evaluate import evaluate
-from multiview_detector.utils.nms import nms
-from multiview_detector.utils.meters import AverageMeter
-from multiview_detector.utils.image_utils import add_heatmap_to_image, vertical_prediction_vis
-from multiview_detector.utils.gaussian_mse import target_transform
-from multiview_detector.utils.person_help import vis
+from evaluation.evaluate import evaluate
+from utils.nms import nms
+from utils.meters import AverageMeter
+from utils.image_utils import add_heatmap_to_image, vertical_prediction_vis
+from utils.gaussian_mse import target_transform
+from utils.person_help import vis
 
 
 class BaseTrainer(object):

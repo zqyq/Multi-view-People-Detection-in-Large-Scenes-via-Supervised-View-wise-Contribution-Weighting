@@ -3,12 +3,12 @@ import argparse
 import torch
 import torch.nn as nn
 from torchvision.models.vgg import vgg16
-from multiview_detector.models.resnet import resnet18
+from models.resnet import resnet18
 
 import matplotlib.pyplot as plt
 import os
-from multiview_detector.models.CVCS.cvcs_proj import spatial_transoformation_layer
-from multiview_detector.utils.person_help import vis
+from models.CVCS.cvcs_proj import spatial_transoformation_layer
+from utils.person_help import vis
 import torch.nn.functional as F
 
 
@@ -239,12 +239,12 @@ class PerspTransDetector(nn.Module):
 
 def test(args):
     # from utils.person_help import vis
-    from multiview_detector.utils.load_model import loadModel
+    from utils.load_model import loadModel
     import torchvision.transforms as transforms
     os.environ['CUDA_VISIBLE_DEVICES'] = '0,1'
     # os.environ["CUDA_LAUNCH_BLOCKING"] = "1"
-    from multiview_detector.datasets.CVCS.CVCS import CVCS
-    from multiview_detector.datasets.CVCS.frame_CVCS import frameDataset
+    from datasets.CVCS.CVCS import CVCS
+    from datasets.CVCS.frame_CVCS import frameDataset
     from torch.utils.data import DataLoader
     _transform = transforms.Compose([
         transforms.ToTensor(),

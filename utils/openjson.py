@@ -5,9 +5,9 @@ from PIL import Image
 import cv2
 import matplotlib.pyplot as plt
 import numpy as np
-from multiview_detector.utils.image_utils import add_heatmap_to_image
-from multiview_detector.utils.gaussian_blur_detecting import draw_umich_gaussian
-from multiview_detector.utils.image_utils import img_color_denormalize
+from utils.image_utils import add_heatmap_to_image
+from utils.gaussian_blur_detecting import draw_umich_gaussian
+from utils.image_utils import img_color_denormalize
 
 denormalize = img_color_denormalize((0.485, 0.456, 0.406), (0.229, 0.224, 0.225))
 img_reduce = 4

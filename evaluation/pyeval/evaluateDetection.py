@@ -1,6 +1,6 @@
 ### python version of matlab evaluation toolkit
 import numpy as np
-from multiview_detector.evaluation.pyeval.CLEAR_MOD_HUN import CLEAR_MOD_HUN
+from evaluation.pyeval.CLEAR_MOD_HUN import CLEAR_MOD_HUN
 
 
 def evaluateDetection_py(res_fpath, gt_fpath, dist_thres, dataset_name):
@@ -14,7 +14,7 @@ def evaluateDetection_py(res_fpath, gt_fpath, dist_thres, dataset_name):
     Some critical information to notice before you use this API:
     1. This API is only tested and deployed in this project: MVDet https://github.com/hou-yz/MVDet, might not be compatible with other projects.
     2. The detection result using this API is a little bit lower (approximately 0~2% decrease in MODA, MODP) than that using MATLAB evaluation tool,
-        the reason might be that the Hungarian Algorithm implemented in sklearn.multiview_detector.utils.linear_assignment_.linear_assignment is a little bit different with the
+        the reason might be that the Hungarian Algorithm implemented in sklearn.utils.linear_assignment_.linear_assignment is a little bit different with the
         one implemented by P. Dollar, hence leading to different results.
         Therefore, please use the official MATLAB API if you want to obtain the same result shown in the paper. This Python API is only used for convenience.
     3. The training process would not be affected by this API.

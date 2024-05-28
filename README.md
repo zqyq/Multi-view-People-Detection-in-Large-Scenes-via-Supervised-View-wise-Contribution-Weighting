@@ -1,4 +1,4 @@
-# Multi-View Detection In Large Scenes via Supervised View-Wise Contribution Weighting, AAAI 2024
+#  Multi-view People Detection in Large Scenes via Supervised View-wise Contribution Weighting, AAAI 2024
 
 ## Abstract
   Recent deep learning-based multi-view people detection (MVD) methods have shown promising results on existing

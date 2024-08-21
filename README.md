@@ -13,7 +13,7 @@
   cross-scene multi-view people detection performance.
 ## Overview
 We release the PyTorch code for the MVDNet, a stable multi-view people detector with promising performance on CVCS,
-CitySTreet, Wildtrack, and MultiviewX datasets. 
+CityStreet, Wildtrack, and MultiviewX datasets. 
 
 ## Content
 - [Dependencies](#dependencies)

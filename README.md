@@ -1,5 +1,7 @@
 #  Multi-view People Detection in Large Scenes via Supervised View-wise Contribution Weighting, AAAI 2024
 
+![Pipeline](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/Pipeline.png "Pipeline")
+
 ## Abstract
   Recent deep learning-based multi-view people detection (MVD) methods have shown promising results on existing
   datasets. However, current methods are mainly trained and evaluated on small, single scenes with a limited
@@ -11,15 +13,18 @@
   comparison. The model's performance on new testing scenes is further improved with a simple domain adaptation
   technique. Experimental results demonstrate the effectiveness of our approach in achieving promising 
   cross-scene multi-view people detection performance.
+  
 ## Overview
 We release the PyTorch code for the MVDNet, a stable multi-view people detector with promising performance on CVCS,
-CityStreet, Wildtrack, and MultiviewX datasets. Here, the pipeline of this paper is as follows:
-![Pipeline](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/Pipeline.png "Pipeline")
-## Poster & Video
-(All images and videos have been uploaded to this repository. Please take a look!...)
-For a more comprehensive representation, we also provide the poster and video here:
-![Poster](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/poster_fig.png "Poster")
+CityStreet, Wildtrack, and MultiviewX datasets. 
+
+## Video
 ![Video](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/video_short_gif.gif "video gif")
+
+## Poster 
+(All images and videos have been uploaded to this repository. Please take a look!...)
+AAAI 2024 poster:
+![Poster](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/poster_fig.png "Poster")
 
 ## Content
 - [Dependencies](#dependencies)

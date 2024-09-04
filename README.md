@@ -16,7 +16,8 @@ We release the PyTorch code for the MVDNet, a stable multi-view people detector 
 CityStreet, Wildtrack, and MultiviewX datasets. Here, the pipeline of this paper is as follows:
 ![Pipeline](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/Pipeline.png "Pipeline")
 ## Poster & Video
-For more concrete representation, we also provide the poster and video here:
+(All images and videos have been uploaded to this repository. Please take a look!...)
+For a more comprehensive representation, we also provide the poster and video here:
 ![Poster](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/poster_fig.png "Poster")
 ![Video](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/video_short_gif.gif "video gif")
 

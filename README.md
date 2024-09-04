@@ -22,7 +22,6 @@ CityStreet, Wildtrack, and MultiviewX datasets.
 ![Video](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/video_short_gif.gif "video gif")
 
 ## Poster 
-(All images and videos have been uploaded to this repository. Please take a look!...)
 AAAI 2024 poster:
 ![Poster](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/poster_fig.png "Poster")
 

@@ -15,7 +15,6 @@
   cross-scene multi-view people detection performance.
   
 ## Video
-https://github.com/graphdeco-inria/gaussian-splatting/assets/40643808/90a2e4d3-cf2e-4633-b35f-bfe284e28ff7
 [video](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/issues/2#issue-2504801936)
 
 ## Poster 

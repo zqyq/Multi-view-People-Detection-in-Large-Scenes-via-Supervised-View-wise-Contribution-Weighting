@@ -18,7 +18,7 @@ CityStreet, Wildtrack, and MultiviewX datasets. Here, the pipeline of this paper
 ## Poster & Video
 For more concrete representation, we also provide the poster and video here:
 ![Poster](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/poster_fig.png "Poster")
-<iframe width="560" height="315" src="https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/PresentationVideo.mp4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+![Video](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/video_short_gif.gif "video gif")
 
 ## Content
 - [Dependencies](#dependencies)

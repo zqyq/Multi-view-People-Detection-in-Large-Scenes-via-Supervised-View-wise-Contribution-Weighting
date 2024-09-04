@@ -15,8 +15,9 @@
   cross-scene multi-view people detection performance.
   
 ## Video
-
-https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/PresentationVideo.mp4
+<video src="https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/PresentationVideo.mp4" controls>
+  Your browser does not support the video tag.
+</video>
 
 ## Poster 
 AAAI 2024 poster:

@@ -81,7 +81,7 @@ This work was supported in parts by NSFC (62202312, 62161146005, U21B2023, U2001
 ## Reference
 ```
 @inproceedings{MVD24,
-title={Multi-view People Detection in Large Scenes via Supervised View-wise ContributionWeighting},
+title={Multi-view People Detection in Large Scenes via Supervised View-wise Contribution Weighting},
 author={Qi Zhang and Yunfei Gong and Daijie Chen and Antoni B. Chan and Hui Huang},
 booktitle={AAAI Conference on Artificial Intelligence},
 pages={7242--7250},

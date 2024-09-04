@@ -14,16 +14,16 @@
   technique. Experimental results demonstrate the effectiveness of our approach in achieving promising 
   cross-scene multi-view people detection performance.
   
-## Overview
-We release the PyTorch code for the MVDNet, a stable multi-view people detector with promising performance on CVCS,
-CityStreet, Wildtrack, and MultiviewX datasets. 
-
 ## Video
 ![Video](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/video_short_gif.gif "video gif")
 
 ## Poster 
 AAAI 2024 poster:
 ![Poster](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/poster_fig.png "Poster")
+
+## Overview
+We release the PyTorch code for the MVDNet, a stable multi-view people detector with promising performance on CVCS,
+CityStreet, Wildtrack, and MultiviewX datasets. 
 
 ## Content
 - [Dependencies](#dependencies)

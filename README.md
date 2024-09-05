@@ -1,4 +1,4 @@
-#  Multi-view People Detection in Large Scenes via Supervised View-wise Contribution Weighting, AAAI 2024
+#  Qi Zhang, Yunfei Gong, Daijie Chen, Antoni B. Chan, and Hui Huang. Multi-view People Detection in Large Scenes via Supervised View-wise Contribution Weighting, AAAI 2024.
 
 ![Pipeline](https://github.com/zqyq/Multi-view-People-Detection-in-Large-Scenes-via-Supervised-View-wise-Contribution-Weighting/blob/main/Pipeline.png "Pipeline")
 
